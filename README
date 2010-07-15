@@ -1,0 +1,19 @@
+# Officielebekendmakingen scraper
+Author: Justin van Wees <justin@vwees.net>
+Date: 2010-06-21
+
+**Officielebekendmakingen scraper** scrapes the search result pages of https://zoek.officielebekendmakingen.nl/ and downloads the XML documents it may find along it's way.
+
+## Requirements
+  * Python 2.5 or 2.6 
+  * Twisted 2.5.0, 8.0 or above (http://twistedmatrix.com/trac/)
+  * libxml2 2.6.28 or above (http://xmlsoft.org/)
+  * Scrapy 0.8 or above (http://scrapy.org/)
+
+## Installation and configuration
+After you've made sure that all the required Python packages are installed, please edit "officielebekendmakingen/settings.py". The settings should be self explanatory.
+
+## Running Officielebekendmakingen scraper
+Run "python scrapy-ctl.py crawl zoek.officielebekendmakingen.nl"
+
+You can monitor the Scrapy process by visiting http://[HOSTNAME]:6080 or by opening a Telnet session to port 6023 (the "stats" object contains information about the current run)
