@@ -82,11 +82,14 @@ class OfficielebekendmakingenSpider(CrawlSpider):
 			self.downloaded_documents.append(item['identifier'])
 			yield OfficielebekendmakingenItem(item)
 			
-			if not(os.path.exists(settings.get('DOWNLOAD_DIR') + '/' + item['docType'][0])):
-				os.mkdir(settings.get('DOWNLOAD_DIR') + '/' + item['docType'][0])
+			# Use documenttype as foldername, but first replace any spaces with an underscore
+			foldername = re.sub('\s', '_', item['docType'][0])
+			
+			if not(os.path.exists(settings.get('DOWNLOAD_DIR') + '/' + foldername)):
+				os.mkdir(settings.get('DOWNLOAD_DIR') + '/' + foldername)
 			
 			filename = response.url.split("/")[-1]
-			open(settings.get('DOWNLOAD_DIR') + '/' + item['docType'][0] + '/' + filename, 'wb').write(response.body)
+			open(settings.get('DOWNLOAD_DIR') + '/' + foldername + '/' + filename, 'wb').write(response.body)
 			
 		else:
 			self.log('Error fetching %s, status %s' %(response.url, response.status))
